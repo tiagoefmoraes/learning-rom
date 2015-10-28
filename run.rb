@@ -7,6 +7,10 @@ env = ROM::Environment.new
 env.setup(:csv, 'users.csv')
 
 class Users < ROM::Relation[:csv]
+  view(:base, [:id, :name]) do
+    self
+  end
+
   def by_id(id)
     restrict(id: id)
   end
