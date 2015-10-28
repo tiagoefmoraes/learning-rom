@@ -1,6 +1,7 @@
 require 'bundler'
 Bundler.setup
 
+require 'ostruct'
 require 'rom-repository'
 require 'rom/plugins/relation/view'
 require 'rom/plugins/relation/key_inference'
@@ -36,14 +37,14 @@ p rom.relation(:users).by_id(1).one
 
 
 
-
-
+class User < OpenStruct
+end
 
 class UserRepository < ROM::Repository::Base
  relations :users
 
  def get(id)
-   users.by_id(id)
+   users.as(User).by_id(id).one!
  end
 
 end
