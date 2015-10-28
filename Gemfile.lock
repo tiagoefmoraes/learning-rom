@@ -1,0 +1,60 @@
+GIT
+  remote: git://github.com/rom-rb/rom-csv.git
+  revision: 5ebd693438100e391f5b436f4259b3706b68652e
+  branch: master
+  specs:
+    rom-csv (0.2.0)
+      rom (~> 0.9, >= 0.9.0)
+
+GIT
+  remote: git://github.com/rom-rb/rom-repository.git
+  revision: 6457ee157c2d4fd46102001d7dd6ce0cf988777c
+  branch: master
+  specs:
+    rom-repository (0.1.0)
+      anima (~> 0.2, >= 0.2)
+      rom (~> 0.9, >= 0.9.0)
+      rom-mapper (~> 0.2, >= 0.2.0)
+      rom-support (~> 0.1, >= 0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    abstract_type (0.0.7)
+    adamantium (0.2.0)
+      ice_nine (~> 0.11.0)
+      memoizable (~> 0.4.0)
+    anima (0.3.0)
+      abstract_type (~> 0.0.7)
+      adamantium (~> 0.2)
+      equalizer (~> 0.0.11)
+    equalizer (0.0.11)
+    ice_nine (0.11.1)
+    inflecto (0.0.2)
+    memoizable (0.4.2)
+      thread_safe (~> 0.3, >= 0.3.1)
+    rom (0.9.1)
+      equalizer (~> 0.0, >= 0.0.9)
+      rom-mapper (~> 0.2, >= 0.2.0)
+      rom-support (~> 0.1, >= 0.1.0)
+      transproc (~> 0.3, >= 0.3.0)
+    rom-mapper (0.2.0)
+      equalizer (~> 0.0, >= 0.0.10)
+      rom-support (~> 0.1, >= 0.1.0)
+      transproc (~> 0.3)
+    rom-support (0.1.0)
+      wisper (~> 1.6, >= 1.6.0)
+    thread_safe (0.3.5)
+    transproc (0.3.2)
+    wisper (1.6.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  inflecto
+  rom-csv!
+  rom-repository!
+
+BUNDLED WITH
+   1.10.6
