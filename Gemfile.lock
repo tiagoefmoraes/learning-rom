@@ -18,6 +18,14 @@ GIT
       rom-support (~> 0.1, >= 0.1.0)
 
 GIT
+  remote: git://github.com/rom-rb/rom-yaml.git
+  revision: 77f1f4898ca482f3667538c8fa520cc7c0eb83bb
+  branch: master
+  specs:
+    rom-yaml (0.2.0)
+      rom (~> 0.9, >= 0.9.0)
+
+GIT
   remote: git://github.com/rom-rb/rom.git
   revision: f6c664e65bfd6d590ba7e6883306ca90b652f159
   branch: master
@@ -61,6 +69,7 @@ DEPENDENCIES
   rom!
   rom-csv!
   rom-repository!
+  rom-yaml!
 
 BUNDLED WITH
    1.10.6

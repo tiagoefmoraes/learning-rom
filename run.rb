@@ -3,38 +3,66 @@ Bundler.setup
 
 require 'ostruct'
 require 'rom-csv'
+require 'rom-yaml'
 require 'rom-repository'
 require 'rom/plugins/relation/view'
 require 'rom/plugins/relation/key_inference'
 
-class Users < ROM::Relation[:csv]
-  dataset :users
+module ROMCSV
+  class Users < ROM::Relation[:csv]
+    dataset :users
 
-  use :view
-  use :key_inference
+    use :view
+    use :key_inference
 
-  def primary_key
-    :id
+    def primary_key
+      :id
+    end
+
+    view(:base, [:id, :name, :email]) do
+      self
+    end
+
+    def by_id(id)
+      restrict(id: id)
+    end
   end
 
-  view(:base, [:id, :name, :email]) do
-    self
-  end
-
-  def by_id(id)
-    restrict(id: id)
+  def self.build_container(csv_file)
+    env = ROM::Environment.new
+    env.setup(:csv, csv_file)
+    env.register_relation(Users)
+    env.finalize.container
   end
 end
 
-env = ROM::Environment.new
-env.setup(:csv, 'users.csv')
-env.register_relation(Users)
+module ROMYAML
+  class Users < ROM::Relation[:yaml]
+    dataset :users
 
-rom = env.finalize.container
+    use :view
+    use :key_inference
 
-p rom.relation(:users).by_id(1).one
+    def primary_key
+      :id
+    end
 
+    view(:base, [:id, :name, :email]) do
+      self
+    end
 
+    def by_id(id)
+      restrict(id: id)
+    end
+  end
+
+  def self.build_container(yml_file)
+    env = ROM::Environment.new
+    env.setup(:yaml, yml_file)
+    env.register_relation(Users)
+    env.finalize.container
+  end
+end
 
 
 class User < OpenStruct
@@ -49,6 +77,10 @@ class UserRepository < ROM::Repository::Base
 
 end
 
-repo = UserRepository.new(rom)
+csv_repo = UserRepository.new(ROMCSV.build_container('users.csv'))
 
-puts repo.get(1)
+puts csv_repo.get(1)
+
+yaml_repo = UserRepository.new(ROMYAML.build_container('users.yml'))
+
+puts yaml_repo.get(1)
