@@ -2,12 +2,10 @@ require 'bundler'
 Bundler.setup
 
 require 'ostruct'
+require 'rom-csv'
 require 'rom-repository'
 require 'rom/plugins/relation/view'
 require 'rom/plugins/relation/key_inference'
-
-env = ROM::Environment.new
-env.setup(:csv, 'users.csv')
 
 class Users < ROM::Relation[:csv]
   dataset :users
@@ -28,6 +26,8 @@ class Users < ROM::Relation[:csv]
   end
 end
 
+env = ROM::Environment.new
+env.setup(:csv, 'users.csv')
 env.register_relation(Users)
 
 rom = env.finalize.container
